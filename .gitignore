@@ -1,0 +1,18 @@
+# Sensitive files
+*.key
+*.pem
+*.crt
+*.env
+*.config
+*.json
+*.xml
+*.yml
+*.yaml
+*.secret
+*.password
+*.credentials
+.idea/
+db.sqlite3
+__pycache__/
+.env/
+.env
