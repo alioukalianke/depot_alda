@@ -11,14 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 import os
-import dj_database_url
-
 from pathlib import Path
-
-import environ
-
-venv = environ.Env()
-environ.Env.read_env()  # Charge les variables du fichier .env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,9 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-*-gjmlxp3f&m*11+k1_s71^n2_*sx!a39x6d!ulocx+doewzu-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["genomic_platform.herokuapp.com"]
+#ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['genomic_platform.onrender.com']
 
 
 # Application definition
@@ -56,9 +50,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-    ...
 ]
 
 ROOT_URLCONF = 'genomic_platform.urls'
@@ -85,12 +76,18 @@ WSGI_APPLICATION = 'genomic_platform.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+import os
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('Mabase'),
+        'USER': os.environ.get('Aliou'),
+        'PASSWORD': os.environ.get('@lioubakolo224'),
+        'HOST': os.environ.get('DB_HOST'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
     }
 }
+
 
 
 # Password validation
@@ -129,9 +126,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -139,7 +134,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_URL = 'login'  # Nom de l'URL de connexion définie dans cipher/urls.py
 LOGIN_REDIRECT_URL = 'home'  # Rediriger vers la page d'accueil après la connexion
@@ -154,10 +149,5 @@ EMAIL_HOST_PASSWORD = '@lioubakolo224'
 DEFAULT_FROM_EMAIL = 'alioubakolo224@gmail.com'
 
 SITE_URL = 'http://127.0.0.1:8000'  # Ou votre domaine réel
-
-DATABASES = {
-    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
-}
-
 
 

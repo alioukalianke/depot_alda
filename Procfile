@@ -1,1 +1,4 @@
-web: gunicorn genomic_platform.wsgi --log-file -
+web: gunicorn genomic_platform.wsgi
+
+
+
