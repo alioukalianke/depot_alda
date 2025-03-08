@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Rechercher des données</h2>
+    <form method="get" action="{% url 'search_data' %}">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" name="q" placeholder="Rechercher..." value="{{ query }}">
+            <button type="submit" class="btn btn-primary">Rechercher</button>
+        </div>
+    </form>
+
+    {% if results %}
+        <h3>Résultats pour "{{ query }}"</h3>
+        <ul class="list-group">
+            {% for result in results %}
+                <li class="list-group-item">
+                    <a href="{% url 'data_detail' result.id %}">{{ result.title }}</a>
+                    <p>{{ result.description }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucun résultat trouvé.</p>
+    {% endif %}
+</div>
+{% endblock %}

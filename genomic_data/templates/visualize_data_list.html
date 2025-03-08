@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Visualiser des données</h2>
+    <ul class="list-group">
+        {% for data in user_data %}
+            <li class="list-group-item">
+                <a href="{% url 'data_detail' data.id %}">{{ data.title }}</a>
+                <p>{{ data.description }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

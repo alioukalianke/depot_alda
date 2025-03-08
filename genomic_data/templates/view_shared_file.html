@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h2>{{ genomic_data.title }}</h2>
+        </div>
+        <div class="card-body">
+            <p>{{ genomic_data.description }}</p>
+            <p><strong>Téléchargé par :</strong> {{ genomic_data.user.username }}</p>
+            <p><strong>Date de création :</strong> {{ genomic_data.created_at }}</p>
+
+            <!-- Lien pour télécharger le fichier -->
+            <a href="{{ genomic_data.data_file.url }}" class="btn btn-primary" download>
+                <i class="fas fa-download"></i> Télécharger le fichier
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

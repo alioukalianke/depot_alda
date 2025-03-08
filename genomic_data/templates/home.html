@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <!-- Section de bienvenue avec image -->
+    <div class="text-center">
+        <h1 class="display-4 mb-4">Bienvenue sur la Plateforme Genomic</h1>
+        <p class="lead mb-4">Partagez et visualisez vos données génomiques en toute sécurité, avec une interface simple et intuitive.</p>
+        <img src="https://via.placeholder.com/800x400" alt="Genomics" class="img-fluid rounded mb-4" />
+    </div>
+
+    <!-- Section de présentation des avantages -->
+    <div class="row text-center mb-5">
+        <div class="col-md-4">
+            <i class="fas fa-shield-alt fa-3x mb-3"></i>
+            <h4>Sécurité</h4>
+            <p>Vos données sont protégées grâce à des technologies de pointe.</p>
+        </div>
+        <div class="col-md-4">
+            <i class="fas fa-cloud-upload-alt fa-3x mb-3"></i>
+            <h4>Facilité de téléchargement</h4>
+            <p>Un processus simple pour télécharger et partager vos données.</p>
+        </div>
+        <div class="col-md-4">
+            <i class="fas fa-users fa-3x mb-3"></i>
+            <h4>Communauté</h4>
+            <p>Rejoignez une communauté de chercheurs et d'experts pour échanger des connaissances.</p>
+        </div>
+    </div>
+
+    <!-- Boutons d'action selon l'état de connexion -->
+    {% if user.is_authenticated %}
+        <div class="text-center mt-4">
+            <a href="{% url 'upload' %}" class="btn btn-primary btn-lg mr-3">
+                <i class="fas fa-upload"></i> Télécharger des données
+            </a>
+            <a href="{% url 'logout' %}" class="btn btn-danger btn-lg">
+                <i class="fas fa-sign-out-alt"></i> Déconnexion
+            </a>
+        </div>
+    {% else %}
+        <div class="text-center mt-4">
+            <a href="{% url 'login' %}" class="btn btn-primary btn-lg mr-3">
+                <i class="fas fa-sign-in-alt"></i> Connexion
+            </a>
+            <a href="{% url 'register' %}" class="btn btn-success btn-lg">
+                <i class="fas fa-user-plus"></i> Inscription
+            </a>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

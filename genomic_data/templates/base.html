@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genomic Platform</title>
+    
+    {% load static %}
+    <!-- Fichiers CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Barre de navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <i class="fas fa-dna"></i> Alda Technology
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    {% if user.is_authenticated %}
+                        <!-- Lien Recherche -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'search_data' %}">
+                                <i class="fas fa-search"></i> Recherche
+                            </a>
+                        </li>
+
+                        <!-- Lien Visualisation des données -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'visualize_data_list' %}">
+                                <i class="fas fa-eye"></i> Visualisation
+                            </a>
+                        </li>
+
+                        <!-- Lien Analyse des données -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'analyze_data_list' %}">
+                                <i class="fas fa-chart-line"></i> Analyse
+                            </a>
+                        </li>
+
+                        <!-- Lien Partage des données -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'share_data' %}">
+                                <i class="fas fa-share-alt"></i> Partage
+                            </a>
+                        </li>
+
+                        
+                        <!-- Menu déroulant avec options supplémentaires -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user"></i> Utilisateur
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{% url 'edit_profile' %}">Profil</a></li>
+                                <li><a class="dropdown-item" href="{% url 'user_settings' %}">Paramètres</a></li>
+                                <li><a class="dropdown-item" href="{% url 'user_notifications' %}">Notifications</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{% url 'logout' %}">Se déconnecter</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Lien Déconnexion -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">
+                                <i class="fas fa-sign-out-alt"></i> Déconnexion
+                            </a>
+                        </li>
+
+                        
+                    {% else %}
+                        <!-- Lien Connexion -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">
+                                <i class="fas fa-sign-in-alt"></i> Connexion
+                            </a>
+                        </li>
+
+                        <!-- Lien Inscription -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'register' %}">
+                                <i class="fas fa-user-plus"></i> Inscription
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenu principal -->
+    <div class="container mt-4">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!-- Pied de page -->
+    <footer class="bg-dark text-light text-center py-3 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Contact</h5>
+                    <p>Email : support@aldatechnology.com</p>
+                    <p>Téléphone : +33 1 23 45 67 89</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Suivez-nous</h5>
+                    <a href="#" class="text-light me-2">Facebook</a>
+                    <a href="#" class="text-light me-2">Twitter</a>
+                    <a href="#" class="text-light">LinkedIn</a>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <p class="mb-0">&copy; 2025 Alda Technology. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

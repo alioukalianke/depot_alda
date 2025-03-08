@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="card mx-auto" style="max-width: 600px;">
+        <div class="card-header">
+            <h2 class="text-center">Télécharger des données génomiques</h2>
+        </div>
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="title" class="form-label">Titre</label>
+                    <input type="text" class="form-control" id="title" name="title" required>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="data_file" class="form-label">Fichier de données</label>
+                    <input type="file" class="form-control" id="data_file" name="data_file" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Télécharger</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

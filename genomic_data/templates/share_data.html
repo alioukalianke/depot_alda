@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Partager des données</h2>
+    <form method="post">
+        {% csrf_token %}
+        
+        <!-- Sélectionner un fichier -->
+        <div class="mb-3">
+            <label for="file" class="form-label">Sélectionner un fichier</label>
+            <select name="file" id="file" class="form-select" required>
+                <option value="">Choisir un fichier</option>
+                {% for file in user_files %}
+                    <option value="{{ file.id }}">{{ file.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Sélectionner les utilisateurs -->
+        <div class="mb-3">
+            <label for="users" class="form-label">Sélectionner les utilisateurs</label>
+            <select name="users" id="users" multiple class="form-select" required>
+                {% for user in all_users %}
+                    <option value="{{ user.id }}">{{ user.username }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Partager</button>
+    </form>
+</div>
+{% endblock %}

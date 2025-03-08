@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Notifications</h2>
+    <ul class="list-group">
+        {% for notification in notifications %}
+            <li class="list-group-item">
+                <p>{{ notification.message }}</p>
+                {% if notification.shared_file %}
+                    <a href="{% url 'view_shared_file' notification.shared_file.id %}" class="btn btn-primary btn-sm">
+                        <i class="fas fa-file"></i> Ouvrir le fichier
+                    </a>
+                {% endif %}
+                <small class="text-muted">{{ notification.created_at }}</small>
+            </li>
+        {% empty %}
+            <li class="list-group-item">Aucune nouvelle notification.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
